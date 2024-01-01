@@ -1,0 +1,29 @@
+class Solution{
+public:
+    vector<int> findTwoElement(vector<int> arr, int n) {
+        // code here
+        vector<int> ans ;
+        int i=0 ;
+        while(i<n){
+            int correctindex = arr[i]-1 ;
+            if(arr[i] != arr[correctindex]){
+                swap(arr[i] , arr[correctindex]) ;
+            }else{
+            i++ ;
+            }
+        }
+        for(int i=0 ; i<n ;i++){
+            if(arr[i] != i+1){
+                ans.push_back(arr[i]) ;
+                ans.push_back(i+1) ;
+            }
+        }
+        return ans ;
+        
+        
+    }
+};
+// Using cyclic sort to , to first sort the element in O(n)time . 
+// since element are in the range of 1 - N , we will first try to put every element on its correct index . 
+// then after this we run a loop  to check which element is not present in its correct index .  
+// so we got the both the missing and the repeating number in the array in O(n) time and 0(1) space .
