@@ -1,0 +1,44 @@
+#define mod 1000000007
+class Solution {
+public:
+int recursion(int index , int k , int end){
+   if(k==0 && index == end){
+       return 1 ;
+   }
+   if(k<0){
+    return 0 ;
+   }
+    int left = recursion(index-1 ,k-1,end) ;
+    int right = recursion(index+1 ,k-1 ,end) ;
+    return left+right ;
+}
+int memo(int index , int k , int end , vector<vector<int>> &dp){
+   if(k==0 && index == end){
+       return 1 ;
+   }
+   if(k<0){
+    return 0 ;
+   }
+   if(dp[index+1001][k] != -1){
+       return dp[index+1001][k] ;
+   }
+    int left = memo(index-1 ,k-1,end,dp)%mod ;
+    int right = memo(index+1 ,k-1 ,end,dp)%mod ;
+dp[index+1001][k] = (left+right)%mod ;
+return dp[index+1001][k] ;
+}
+    int numberOfWays(int startPos, int endPos, int k) {
+        int index =  startPos ;
+        // int ans = recursion(index , k ,endPos ) ;
+        // return ans ;
+ vector<vector<int>> dp(4000, vector<int>(k+1, -1));
+         int ans = memo(index , k ,endPos,dp) ;
+        return ans ;
+    }
+};
+
+// Using dp .  
+// same approach as climbing of the stair . taking [ f(index , k ) ] In this question we need to either move left , or move right . 
+// while moving left we make index-1 and k-1 , and while moving right we make index+1 , k-1 . 
+// at the end find total number of ways we add both ways left + right . 
+// after recursion use memoization to optimise the recursive solution 
