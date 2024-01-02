@@ -1,0 +1,33 @@
+string encode(string src)
+{     
+  //Your code here 
+  string ans = "" ;
+  pair<char ,int> p ;
+  for(int i=0 ; i<src.length() ;i++){
+      if(i==0){
+         // p.make_pair(src[i] ,1) ;
+         p.first = src[i] ;
+         p.second = 1 ;
+      }
+      else if(p.first == src[i]){
+          p.second = p.second + 1 ;
+      }else{
+          ans.push_back(p.first) ;
+          ans.push_back(p.second+'0') ;
+          p.first = src[i] ;
+          p.second = 1 ;
+      }
+  }
+    ans.push_back(p.first) ;
+          ans.push_back(p.second+'0') ;
+  return ans ;
+  
+}     
+ 
+ // It can be done using map but since we do not need extra space so , what we did is we use pair .
+// In pair we first store the element at index = 0 .
+// And as we move through the loop , if the value at str[i] is equal to p.first , we simply update the p.second + 1 ,
+// and when the value at p.first != str[i] we store the value of pair in a string ans and update the pair p.first = str[i] and , p.second = 1
+// ( since to keep the track of the count of the new element the new element is found ) .
+// at last after ending the loop , we need to store in ans whatever value is stored in the pair at last . 
+// ans return the ans , to get your final ans . 
