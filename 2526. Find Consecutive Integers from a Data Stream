@@ -1,0 +1,38 @@
+class DataStream {
+public:
+  int n ;
+  int val ; 
+  long long int sum = 0 ;
+  deque<int> q ;
+    DataStream(int value, int k) {
+     val = value ;
+     n = k ;
+    }
+    
+    bool consec(int num) {
+      if(num == val){
+          num = 1 ;
+      }else{
+          num = 0 ;
+      }
+      sum = sum + num ;
+      q.push_back(num) ; 
+      if(q.size() < n){
+          return false ;
+      }
+      if(q.size() == n){
+          return sum == n ;
+      }
+      int temp = q.front() ;
+      sum = sum - temp ;
+      q.pop_front() ;
+
+      return sum == n ;
+    }
+};
+// Using dqueue( doubly ended queue which can push and pop element from both the end of the array ) to solve this problem  .
+/**
+ * Your DataStream object will be instantiated and called as such:
+ * DataStream* obj = new DataStream(value, k);
+ * bool param_1 = obj->consec(num);
+ */
