@@ -1,0 +1,45 @@
+class Solution{   
+public:
+    string printMinNumberForPattern(string S){
+        // creating a stack
+        stack<int> st ;
+        // creating ans to store final ans 
+        string ans = "" ;
+        for(int i=0 ; i<S.length() ;i++){
+            st.push(i+1) ;
+            if(S[i] == 'D'){
+                continue ;
+            }
+            else if(S[i] == 'I'){
+                while(st.empty() != true){
+                    ans.push_back(st.top() + '0') ;
+                    st.pop() ;
+                }
+            }
+        }
+        st.push(S.length()+1) ;
+        while(st.empty() != true){
+             ans.push_back(st.top() + '0') ;
+                    st.pop() ;
+        }
+        return ans ;
+    }
+};
+
+ // basic approach of problem 
+  // 1 : inserting element equal to i+1 in stack for every index 
+   // checking if S[i] == D , then we do not do anything 
+   // if S[i] == I . then we pop out all element from the stack and put it in our ans 
+   // at last when loop ends , we push element =  s.length() + 1 in our stack 
+   // now , pop out all element from the stack and put it in our ans , 
+   // till stack become empty
+   // Now return the final ans .
+   // dry run of a example : Let's dry run the code with the example pattern 'IIDDD':
+//   1. For the first 'I', we reverse the stack [1] and add it to the result: [1].
+// 2. For the second 'I', we reverse the stack [2] and add it to the result: [1, 2].
+// 3. For the 'D', we add 3 to the stack.
+// 4. For the second 'D', we add 4 to the stack.
+// 5. For the third 'D', we add 5 to the stack.
+// 6. Now once out of the loop we add 6 to the stack. 
+// 6. The remaining stack is reversed and added to the result: [6, 5, 4, 3].
+// 7. The final generated number is 126543.
